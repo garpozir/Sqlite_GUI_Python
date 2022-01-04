@@ -41,7 +41,7 @@ class Ui_MainWindow(QWidget):
         self.tableWidget.setGridStyle(QtCore.Qt.SolidLine)
         self.tableWidget.setWordWrap(True)
         self.tableWidget.setCornerButtonEnabled(True)
-        conn = sqlite3.connect("E:\db\db.db")
+        conn = sqlite3.connect("db.db")
         cur = conn.cursor()
         cur.execute("Select count(*) from adam")
         for row in cur:
@@ -69,7 +69,7 @@ class Ui_MainWindow(QWidget):
         self.tableWidget.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, item)
-        conn = sqlite3.connect("E:\db\db.db")
+        conn = sqlite3.connect("db.db")
         cur = conn.cursor()
         cur.execute("Select id from adam ORDER BY id DESC LIMIT 100")
         rows = cur.fetchall()
@@ -126,7 +126,7 @@ class Ui_MainWindow(QWidget):
         item.setText(_translate("MainWindow", "کد ملی"))
         __sortingEnabled = self.tableWidget.isSortingEnabled()
         self.tableWidget.setSortingEnabled(False)
-        conn = sqlite3.connect("E:\db\db.db")
+        conn = sqlite3.connect("db.db")
         cur = conn.cursor()
         cur.execute("Select * from adam ORDER BY id DESC LIMIT 100")
         rows = cur.fetchall()
@@ -158,7 +158,7 @@ class Ui_MainWindow(QWidget):
         text = self.lineEdit.text()
         if len(text)>1 or text=='':
             self.tableWidget.clearContents()
-            conn = sqlite3.connect("E:\db\db.db")
+            conn = sqlite3.connect("db.db")
             cur = conn.cursor()
             cur.execute("Select id from adam ORDER BY id DESC LIMIT 100")
             rows = cur.fetchall()
@@ -177,7 +177,7 @@ class Ui_MainWindow(QWidget):
                 xx += 1
             conn.close()
             text='%'+text+'%'
-            conn = sqlite3.connect("E:\db\db.db")
+            conn = sqlite3.connect("db.db")
             cur = conn.cursor()
             cur.execute("Select * from adam where code like '%s' or name like '%s'"
                         " or family like '%s' or sex like '%s' or meli like '%s' ORDER BY id DESC LIMIT 100" % (text,text,text,text,text))

@@ -303,7 +303,7 @@ class Ui_MainWindow(QWidget):
         self.pushButton.setText('ثبت')
         self.pushButton.setEnabled(True)
     def retranslateUi(self, MainWindow):
-        conn = sqlite3.connect("E:\db\db.db")
+        conn = sqlite3.connect("db.db")
         cur = conn.cursor()
         cur.execute("Select count(*) from  adam", )
         for row in cur:
@@ -336,7 +336,7 @@ class Ui_MainWindow(QWidget):
         self.action.setShortcut(_translate("MainWindow", "Ctrl+X"))
 
     def srch(self):
-        conn = sqlite3.connect("E:\db\db.db")
+        conn = sqlite3.connect("db.db")
         cur = conn.cursor()
         cur.execute("Select count(*) from  adam", )
         for row in cur:
@@ -344,7 +344,7 @@ class Ui_MainWindow(QWidget):
         conn.close()
         name = str(row[0])
         if name!='0':
-            os.system('python E:\db\qInput.py')
+            os.system('python3 qInput.py')
         else:
             root = tkinter.Tk()
             root.withdraw()
@@ -360,7 +360,7 @@ class Ui_MainWindow(QWidget):
         self.pushButton.setEnabled(True)
         text, ok = QInputDialog.getText(self, 'ویرایش عامل', 'کد عامل مورد نظر را وارد کنید:')
         if ok:
-            conn = sqlite3.connect("E:\db\db.db")
+            conn = sqlite3.connect("db.db")
             cur = conn.cursor()
             cur.execute("Select * from adam where code='%s'" % (text))
             rows = cur.fetchall()
@@ -381,7 +381,7 @@ class Ui_MainWindow(QWidget):
         text, ok = QInputDialog.getText(self, 'حذف عامل', 'کد عامل مورد نظر را وارد کنید:')
         if ok:
             tix=str(text)
-            sqliteConnection = sqlite3.connect('E:\db\db.db')
+            sqliteConnection = sqlite3.connect('db.db')
             cursor = sqliteConnection.cursor()
             sqlite_insert_query = ("DELETE FROM adam WHERE code='%s'"%(tix) )
             count = cursor.execute(sqlite_insert_query)
@@ -393,7 +393,7 @@ class Ui_MainWindow(QWidget):
                 self.progressBar.setProperty("value", i)
             sleep(0.2)
             self.progressBar.setProperty("value", 0)
-            conn = sqlite3.connect("E:\db\db.db")
+            conn = sqlite3.connect("db.db")
             cur = conn.cursor()
             cur.execute("Select count(*) from  adam", )
             for row in cur:
@@ -408,7 +408,7 @@ class Ui_MainWindow(QWidget):
         self.radioButton.setChecked(True)
         self.progressBar.setProperty("value", 0)
         self.pushButton.setText('ثبت')
-        conn = sqlite3.connect("E:\db\db.db")
+        conn = sqlite3.connect("db.db")
         cur = conn.cursor()
         cur.execute("Select count(*) from  adam", )
         for row in cur:
@@ -426,7 +426,7 @@ class Ui_MainWindow(QWidget):
             pass
         else:
             if (self.abbs == True):
-                conn = sqlite3.connect("E:\db\db.db")
+                conn = sqlite3.connect("db.db")
                 cur = conn.cursor()
                 bb = False
                 cur.execute("Select code from adam where code='%s'" %(num))
@@ -439,7 +439,7 @@ class Ui_MainWindow(QWidget):
                     root.withdraw()
                     messagebox.showerror("خطا", "کد عاملیت تکراری")
                 if bb==False:
-                    sqliteConnection = sqlite3.connect('E:\db\db.db')
+                    sqliteConnection = sqlite3.connect('db.db')
                     cursor = sqliteConnection.cursor()
                     sqlite_insert_query = '''
                     INSERT INTO adam
@@ -456,7 +456,7 @@ class Ui_MainWindow(QWidget):
                         self.progressBar.setProperty("value", i)
                     sleep(0.2)
                     self.progressBar.setProperty("value", 0)
-                    conn= sqlite3.connect ("E:\db\db.db")
+                    conn= sqlite3.connect ("db.db")
                     cur = conn.cursor()
                     cur.execute("Select count(*) from  adam", )
                     for row in cur:
@@ -469,7 +469,7 @@ class Ui_MainWindow(QWidget):
                     self.lineEdit_3.setText('')
                     self.lineEdit.setText('')
             else:
-                conn = sqlite3.connect("E:\db\db.db")
+                conn = sqlite3.connect("db.db")
                 cur = conn.cursor()
                 cur.execute("Select count(code) from adam where code='%s'" % (num))
                 rows = cur.fetchall()
@@ -480,7 +480,7 @@ class Ui_MainWindow(QWidget):
                     root.withdraw()
                     messagebox.showerror("خطا", "چنین عاملی ثبت نشده")
                 else:
-                    sqliteConnection = sqlite3.connect('E:\db\db.db')
+                    sqliteConnection = sqlite3.connect('db.db')
                     cursor = sqliteConnection.cursor()
                     sqlite_insert_query = '''
 Update adam set name = 
